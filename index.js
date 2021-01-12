@@ -1,95 +1,124 @@
-/* "use strict";
-const cat ={
-  color: 'grey',
-  breed: 'spinx',
-  age:8,
-  isMale: true,
-  name:'Kasya',
-  meow: function(){
-    return 'meow!!!'
+'use strict'
+
+class User {
+  constructor (name, surName, age){
+    this.name = name;
+    this.surName = surName;
+    this.age = age;
+
+  }
+  set name(n){
+    if(typeof n ==='number'){
+      throw new TypeError('Data must be a numbers')
+    }
+    this._name = n;
+  }
+
+  get name(){
+    this._name
+  }
+
+  set surName(sn){
+    if(typeof sn ==='number'){
+      throw new TypeError('Data must be a numbers')
+    }
+    this._name = sn;
+  }
+  
+  
+  set fullName(){
+    
+    return this._fullName = `${this.name} ${this.surName}`
+  }
+  get fullName(){
+    this._fullName;
+  }
+
+  set isAdult(){
+    return this._isAdult = this.age >= 18;
+  }
+
+  get isAdult(){
+    return this._isAdult
   }
 }
 
-const cat2 ={
-  color: 'black',
-  breed: 'persia',
-  age:5,
-  isMale: false,
-  name:'Oleg',
-  jump: function(){
-    return 'cat jumping'
+class Woker{
+  constructor(name,surName,dayAtWork=0,salary){
+    this.name = name;
+    this.surName = surName;
+    this.dayAtWork = dayAtWork;
+    this.salary = salary;
+  }
+  getSalary(){
+    return this.dayAtWork * this.salary
+  }
+    
+}
+
+const worker1 = new Woker('Ivan','Ivanovich',20,30);
+console.log(worker.salaryForAllDays()); 
+
+ class Fuel {
+  constructor(volume=0, denisty=0) {
+    this.volume = volume;
+    this.density = denisty;
+  }
+  set volume(v){
+    if(typeof v !=='number'){
+      throw new TypeError('Data must be a numbers')
+    }
+    this._volume = v;
+  }
+  
+  get volume(){
+    this._volume;
+  }
+  
+  set density(v){
+    if(typeof v !=='number'){
+      throw new TypeError('Data must be a numbers')
+    }
+    this._density = v;
+  }
+  
+  get density(){
+    this._density
+  }
+  
+ 
+  
+  get weight(){
+    return this.volume * this.denisty;
   }
 }
 
-const cat3 ={
-  color: 'black & white',
-  breed: 'street cat',
-  age:2,
-  isMale: true,
-  name:'Mura',
-  eat:function(){
-    return 'cat eating'
+class Car{
+  constructor (model,weight=0, fuel){
+    this.model = model;
+    this.weight = weight;
+    this.fuel = fuel;
+    
+  }
+  getSumWeight(){
+   return this.weight + this.fuel.getWeight();
   }
 }
+const car = new Car('zaz',1000, new Fuel(100,50));
 
-function Dog (name, color, age, breed){
-  this.name = name;
-  this.furColor = color;
-  this.age = age;
-  this.breed = breed;
-  this.gav = function(){
-    return 'gav';
+console.log(car.getSumWeight()); 
+
+class Friend {
+  constructor(name, appleAmount, ...friends) {
+    this.name = name;
+    this.appleAmount = appleAmount;
+    this.friends= friends;
+  }
+  countApple(){
+    return this.appleAmount + this.friends.keys(appleAmount);
   }
 }
-const newDog = new Dog ('oleg', 'black', 10, 'breed'); */
+ const oleg = new Friend('Oleg',20);
+ const ivan = new Friend('Ivan',10,oleg);
 
-function User(name, surname, age) {
-  this.name = name;
-  this.surname = surname;
-  this.age = age;
-  this.sayHello = function () {
-    return "Hello!!";
-  };
-}
-
-const newUser = new User("Oleg", "Ivanovich", 25);
-const newUser2 = new User("Oxana", "Ivanovich", 10);
-const newUser3 = new User("Ivan", "Dobryi", 30);
-const newUser4 = new User("Alex", "Dudkov", 25);
-
-console.log(newUser.sayHello());
-console.log(newUser2.sayHello());
-console.log(newUser3.sayHello());
-console.log(newUser4.sayHello());
-
-function Countrys(name, square, population) {
-  this.name = name;
-  this.square = square;
-  this.population = population;
-  /* this.populationDenisty = populationDenistyMet(); */
-    this.populationDenistyMet = function () {
-    return this.population / this.square;
-  };
-}
-
-const country1 = new Countrys("ukraine", 48500, 3000,);
-
-console.log(country1)
-
-function Auto(name,speed){
-  this.name = name;
-  this.speed = speed;
-  this.accelerate = function(plusSpeed){
-    return this.speed = this.speed + plusSpeed;
-  }
-   this.deaccelerate = function(minusSpeed){
-     return this.speed = this.speed - minusSpeed;
-   }
-   this.stop = function(){
-     return this.speed = 0;
-   }
-}
-
-const zaz = new Auto ('zaz', 20);
-const bmw = new Auto ('bmw', 30);
-const audi = new Auto ('audi', 50);
+console.log(ivan.countApple());
