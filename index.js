@@ -1,4 +1,4 @@
-'use strict'
+/* 'use strict'
 
 class User {
   constructor (name, surName, age){
@@ -34,12 +34,15 @@ class User {
     this._fullName;
   }
 
-  set isAdult(){
-    return this._isAdult = this.age >= 18;
+  static isAdult(obj){
+    return obj._isAdult = obj.age >= 18;
   }
 
   get isAdult(){
     return this._isAdult
+  }
+  static isUser(obj){
+    return obj instanceof User;
   }
 }
 
@@ -121,4 +124,47 @@ class Friend {
  const oleg = new Friend('Oleg',20);
  const ivan = new Friend('Ivan',10,oleg);
 
-console.log(ivan.countApple());
+console.log(ivan.countApple()); */
+
+//=============================================================================
+
+class User {
+  constructor(login, email, age, isBanned = false) {
+    this.login = login;
+    this.email = email;
+    this.age = age;
+    this.isBanned = isBanned;
+  }
+  set isBanned(v) {
+    
+    this._isBanned = v;
+  }
+  get isBanned() {
+    return this._isBanned;
+  }
+}
+
+class Admin extends User {
+  constructor(login, email, age) {
+    super(login, email, age);
+  }
+  ban(user) {
+    if (user instanceof User) {
+      user.isBanned = true;
+    }
+    return TypeError('enter right');
+  }
+  unBan(user) {
+    if (user instanceof User) {
+      user.isBanned = false;
+    }
+    return false;
+  }
+}
+
+const oleg = new User("login", "mail", 24);
+const admin = new Admin("admLogin", "emailAdmin", 32);
+const 
+admin.ban(oleg);
+
+console.log(oleg);
