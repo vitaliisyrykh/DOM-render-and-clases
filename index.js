@@ -175,7 +175,72 @@ class Admin extends User {
 const oleg = new User("login", "mail", 24);
 const admin = new Admin("admLogin", "emailAdmin", 32);
 
-
+/* 
 admin.ban(oleg);
-console.log(oleg);
+console.log(oleg); */
 
+class Squirrel {
+  constructor(name, isMale){
+    this.name = name;
+    this.isMale = isMale;
+  }
+
+  eat(){
+    return `${this.name} is eating`;
+  }
+
+  climb(){
+    return `${this.name} is climb`;
+  }
+}
+
+class FlyingSqurrel extends Squirrel{
+  constructor(name, isMale, maxDistance = 50){
+    super(name, isMale)
+    this.maxDistance = maxDistance;
+  }
+
+  fly(){
+    return `${this.name} flying ${Math.random((this.maxDistance)*101) }m`
+  }
+
+}
+
+class FableSquirrel extends FlyingSqurrel{
+  constructor(name,isMale, songs=[1,2,3,4,5]){
+    super(name,isMale)
+    this.songs = songs;
+  }
+
+  dance(){
+    return `${this.name} dancing`
+  }
+  toSing(){
+    return this.songs.forEach(function(song){return console.log(song);});
+  }
+}
+
+const ella = new Squirrel();
+const flyElla = new FlyingSqurrel();
+const magicSqurell = new FableSquirrel();
+ flyElla.fly();
+
+ magicSqurell.toSing();
+
+
+class Figure{
+  constructor(name){
+    this._name = name;
+  }
+  gerArea(){}
+}
+
+class Circle extends Figure{
+  constructor(name, radius){
+    super(name);
+    this.radius = radius;
+  }
+  getArea(){
+    return Math.pow(this.radius)* Math.PI
+  }
+}
