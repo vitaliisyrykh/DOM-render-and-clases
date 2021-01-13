@@ -145,26 +145,37 @@ class User {
 }
 
 class Admin extends User {
+  
   constructor(login, email, age) {
     super(login, email, age);
   }
+  
   ban(user) {
     if (user instanceof User) {
       user.isBanned = true;
     }
     return TypeError('enter right');
   }
+  
   unBan(user) {
     if (user instanceof User) {
       user.isBanned = false;
     }
-    return false;
+    return TypeError('enter right');
+  }
+
+  toggleBan(user){
+    if (user instanceof User) {
+    user.isBanned = !user.isBanned;
+    }
+    return TypeError('enter right');
   }
 }
 
 const oleg = new User("login", "mail", 24);
 const admin = new Admin("admLogin", "emailAdmin", 32);
-const 
-admin.ban(oleg);
 
+
+admin.ban(oleg);
 console.log(oleg);
+
