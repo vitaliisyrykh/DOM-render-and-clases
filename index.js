@@ -1,246 +1,153 @@
-/* 'use strict'
-
-class User {
-  constructor (name, surName, age){
-    this.name = name;
-    this.surName = surName;
-    this.age = age;
-
-  }
-  set name(n){
-    if(typeof n ==='number'){
-      throw new TypeError('Data must be a numbers')
-    }
-    this._name = n;
-  }
-
-  get name(){
-    this._name
-  }
-
-  set surName(sn){
-    if(typeof sn ==='number'){
-      throw new TypeError('Data must be a numbers')
-    }
-    this._name = sn;
-  }
-  
-  
-  set fullName(){
-    
-    return this._fullName = `${this.name} ${this.surName}`
-  }
-  get fullName(){
-    this._fullName;
-  }
-
-  static isAdult(obj){
-    return obj._isAdult = obj.age >= 18;
-  }
-
-  get isAdult(){
-    return this._isAdult
-  }
-  static isUser(obj){
-    return obj instanceof User;
-  }
-}
-
-class Woker{
-  constructor(name,surName,dayAtWork=0,salary){
-    this.name = name;
-    this.surName = surName;
-    this.dayAtWork = dayAtWork;
-    this.salary = salary;
-  }
-  getSalary(){
-    return this.dayAtWork * this.salary
-  }
-    
-}
-
-const worker1 = new Woker('Ivan','Ivanovich',20,30);
-console.log(worker.salaryForAllDays()); 
-
- class Fuel {
-  constructor(volume=0, denisty=0) {
-    this.volume = volume;
-    this.density = denisty;
-  }
-  set volume(v){
-    if(typeof v !=='number'){
-      throw new TypeError('Data must be a numbers')
-    }
-    this._volume = v;
-  }
-  
-  get volume(){
-    this._volume;
-  }
-  
-  set density(v){
-    if(typeof v !=='number'){
-      throw new TypeError('Data must be a numbers')
-    }
-    this._density = v;
-  }
-  
-  get density(){
-    this._density
-  }
-  
- 
-  
-  get weight(){
-    return this.volume * this.denisty;
-  }
-}
-
-class Car{
-  constructor (model,weight=0, fuel){
-    this.model = model;
-    this.weight = weight;
-    this.fuel = fuel;
-    
-  }
-  getSumWeight(){
-   return this.weight + this.fuel.getWeight();
-  }
-}
-const car = new Car('zaz',1000, new Fuel(100,50));
-
-console.log(car.getSumWeight()); 
-
-class Friend {
-  constructor(name, appleAmount, ...friends) {
-    this.name = name;
-    this.appleAmount = appleAmount;
-    this.friends= friends;
-  }
-  countApple(){
-    return this.appleAmount + this.friends.keys(appleAmount);
-  }
-}
- const oleg = new Friend('Oleg',20);
- const ivan = new Friend('Ivan',10,oleg);
-
-console.log(ivan.countApple()); */
-
-//=============================================================================
-
-class User {
-  constructor(login, email, age, isBanned = false) {
-    this.login = login;
-    this.email = email;
-    this.age = age;
-    this.isBanned = isBanned;
-  }
-  set isBanned(v) {
-    
-    this._isBanned = v;
-  }
-  get isBanned() {
-    return this._isBanned;
-  }
-}
-
-class Admin extends User {
-  
-  constructor(login, email, age) {
-    super(login, email, age);
-  }
-  
-  ban(user) {
-    if (user instanceof User) {
-      user.isBanned = true;
-    }
-    return TypeError('enter right');
-  }
-  
-  unBan(user) {
-    if (user instanceof User) {
-      user.isBanned = false;
-    }
-    return TypeError('enter right');
-  }
-
-  toggleBan(user){
-    if (user instanceof User) {
-    user.isBanned = !user.isBanned;
-    }
-    return TypeError('enter right');
-  }
-}
-
-const oleg = new User("login", "mail", 24);
-const admin = new Admin("admLogin", "emailAdmin", 32);
-
+'use strict'
 /* 
-admin.ban(oleg);
-console.log(oleg); */
 
-class Squirrel {
-  constructor(name, isMale){
-    this.name = name;
-    this.isMale = isMale;
+class Stack {
+  constructor(maxSize = 1000, ...args) {
+    this._maxSize = maxSize;
+    this._size = 0;
+
+    for (const item of args) {
+      this.push(item);
+    }
   }
 
-  eat(){
-    return `${this.name} is eating`;
+  get isEmpty() {
+    return this._size === 0;
   }
 
-  climb(){
-    return `${this.name} is climb`;
+  get size() {
+    return this._size;
+  }
+
+  push(value) {
+    if (this._size >= this._maxSize) {
+      throw new RangeError('Stack overflow');
+    }
+    this[`_${this._size++}`] = value;
+    return this._size;
+  }
+
+  pop() {
+    if (this.isEmpty) {
+      return;
+    }
+    const lastItem = this[`_${--this._size}`];
+    delete this[`_${this._size}`];
+    return lastItem;
+  }
+
+  pick() {
+    if (this.isEmpty) {
+      return;
+    }
+
+    return this[`${this._size - 1}`];
+  }
+}
+
+const stack = new Stack();
+
+
+const checkSequence = (str)=>{
+  const stack = new Stack();
+  for(let i = 0; i < str.length; i++){
+    if(str[i]=== '(' || str[i] === '['){
+      stack.push(str[i]);
+    } if (stack.isEmpty) {
+      return false;
+    }else if(stack._size === ')' ){
+      stack.pop();
+    }else if (stack.pick() === '[' && stack._size === ']'){
+      stack.pop();
+    }
+    
+  }
+
+  return stack.isEmpty;
+}
+
+
+
+const string = "(((()[)))]"
+
+console.log(checkSequence(string));  */
+
+/* class Queue {
+  constructor(...args) {
+    this._head = 0;
+    this._tail = 0;
+
+    for(const item of args){
+      this.push(item);
+    }
+  }
+  get size() {
+    return this._tail - this._head;
+  }
+
+  push(value) {
+    this[this._tail++] = value;
+    return this.size;
+  }
+
+  pop() {
+    const lastItem = this[this._head];
+    delete this[this._head++];
+
+    return lastItem;
   }
 }
 
-class FlyingSqurrel extends Squirrel{
-  constructor(name, isMale, maxDistance = 50){
-    super(name, isMale)
-    this.maxDistance = maxDistance;
-  }
+const q1 = new Queue(1,3,5);
+const q2 = new Queue(2,4,6);
 
-  fly(){
-    return `${this.name} flying ${Math.random((this.maxDistance)*101) }m`
-  }
+function mergeQueues (...arg){
+  const result = new Queue();
 
+    while(q1._size || q2._size ){
+      if(q1._size){
+        const buffer = q1.pop();
+        result.push(buffer); 
+      }
+      if(q2._size){
+        const buffer = q2.pop();
+        reuslt.push(buffer);
+      }
+    }
+  
+  return queue
+}
+ */
+/* const user32 = {
+  id:1,
+  name:'john1',
+  surName : 'John1',
+  age:18,
+}
+const user89 = {
+  id:2,
+  name:'Jane',
+  surName : 'John2',
+  age:36,
 }
 
-class FableSquirrel extends FlyingSqurrel{
-  constructor(name,isMale, songs=[1,2,3,4,5]){
-    super(name,isMale)
-    this.songs = songs;
-  }
+const johnMessages = ['str1','str2','str'];
+const janeMessages = ['1111', 'hell', 'test'];
 
-  dance(){
-    return `${this.name} dancing`
-  }
-  toSing(){
-    return this.songs.forEach(function(song){return console.log(song);});
-  }
-}
+const mapAllMessages = new Map();
 
-const ella = new Squirrel();
-const flyElla = new FlyingSqurrel();
-const magicSqurell = new FableSquirrel();
- flyElla.fly();
-
- magicSqurell.toSing();
+mapAllMessages.set(user32.id,johnMessages);
+mapAllMessages.set(user89.id,janeMessages);
 
 
-class Figure{
-  constructor(name){
-    this._name = name;
-  }
-  gerArea(){}
-}
 
-class Circle extends Figure{
-  constructor(name, radius){
-    super(name);
-    this.radius = radius;
-  }
-  getArea(){
-    return Math.pow(this.radius)* Math.PI
-  }
-}
+function getMsgFromMap(userId){
+  return `${mapAllMessages.get(userId)}`;
+} */
+
+
+
+
+
+
+
