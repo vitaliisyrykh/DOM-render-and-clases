@@ -1,5 +1,5 @@
 'use strict'
-/* 
+ 
 
 class Stack {
   constructor(maxSize = 1000, ...args) {
@@ -70,9 +70,9 @@ const checkSequence = (str)=>{
 
 const string = "(((()[)))]"
 
-console.log(checkSequence(string));  */
+console.log(checkSequence(string));  
 
-/* class Queue {
+ class Queue {
   constructor(...args) {
     this._head = 0;
     this._tail = 0;
@@ -117,8 +117,8 @@ function mergeQueues (...arg){
   
   return queue
 }
- */
-/* const user32 = {
+ 
+ const user32 = {
   id:1,
   name:'john1',
   surName : 'John1',
@@ -143,7 +143,7 @@ mapAllMessages.set(user89.id,janeMessages);
 
 function getMsgFromMap(userId){
   return `${mapAllMessages.get(userId)}`;
-} */
+} 
 
 
 
