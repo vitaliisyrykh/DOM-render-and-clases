@@ -1,153 +1,182 @@
-'use strict'
- 
+"use strict";
 
-class Stack {
-  constructor(maxSize = 1000, ...args) {
-    this._maxSize = maxSize;
-    this._size = 0;
+/* 1 Вычислить сумму первых N элементов последовательности . параметр N задает пользователь
+(например n=4 , 1+2+3+4) */
 
-    for (const item of args) {
-      this.push(item);
+function getFirstsum(n) {
+  let sum = 0;
+  for (let i = 0; i <= n; i++) {
+    sum += i;
+  }
+  return sum;
+}
+
+/* 2.1 Создать объект Student который содержит следующие свойства: имя, фамилию, пол, контактные данные.
+2.2 Создать объект, который содержит свойства, о факультете и кафедре.
+2.3 Связать объекты между собой. т.е. прописать данные об факультете и кафедре для студента
+2.4 Реализовать функцию выводит на экран всю информацию о студенте */
+/* const GENDER_LIST = ["male", "female", "unknown"];
+
+class Faculty {
+  constructor(faculty, chair) {
+    this.faculty = faculty;
+    this.chair = chair;
+  }
+  set faculty(v) {
+    if (typeof v !== "string") {
+      throw new TypeError("faculty must be a string");
     }
+    return (this._faculty = v);
+  }
+  get faculty() {
+    return this._faculty;
   }
 
-  get isEmpty() {
-    return this._size === 0;
-  }
-
-  get size() {
-    return this._size;
-  }
-
-  push(value) {
-    if (this._size >= this._maxSize) {
-      throw new RangeError('Stack overflow');
+  set chair(v) {
+    if (typeof v !== "string") {
+      throw new TypeError("chair must be a string");
     }
-    this[`_${this._size++}`] = value;
-    return this._size;
+    return (this._chair = v);
   }
 
-  pop() {
-    if (this.isEmpty) {
-      return;
-    }
-    const lastItem = this[`_${--this._size}`];
-    delete this[`_${this._size}`];
-    return lastItem;
-  }
-
-  pick() {
-    if (this.isEmpty) {
-      return;
-    }
-
-    return this[`${this._size - 1}`];
+  get chair() {
+    return this._chair;
   }
 }
 
-const stack = new Stack();
+class Student extends Faculty {
+  constructor(name, surName, gender, email, phone, faculty, chair) {
+    super(faculty, chair);
+    this.name = name;
+    this.surName = surName;
+    this.gender = gender;
+    this.contacts = {
+      email,
+      phone,
+    };
+  }
 
-
-const checkSequence = (str)=>{
-  const stack = new Stack();
-  for(let i = 0; i < str.length; i++){
-    if(str[i]=== '(' || str[i] === '['){
-      stack.push(str[i]);
-    } if (stack.isEmpty) {
-      return false;
-    }else if(stack._size === ')' ){
-      stack.pop();
-    }else if (stack.pick() === '[' && stack._size === ']'){
-      stack.pop();
+  set name(v) {
+    if (typeof v !== "string") {
+      throw new TypeError("name must be a string");
     }
-    
+    return (this._name = v);
+  }
+  get name() {
+    return this._name;
   }
 
-  return stack.isEmpty;
-}
+  set surName(v) {
+    if (typeof v !== "string") {
+      throw new TypeError("surname must be a string");
+    }
+     (this._surName = v);
+  }
+  get surName() {
+    return this._surName;
+  }
 
+  set gender(v) {
+    debugger;
+    if (typeof v !== "string" || !GENDER_LIST.includes(v)) {
+      throw new TypeError("gender must be a string or male or female");
+    }
+    this._gender = v;
+  }
+  get gender() {
+    return this._gender;
+  }
 
+  set email(v) {
+    if (typeof v !== "string") {
+      throw new TypeError("email must be a string");
+    }
+     (_email = v);
+  }
+  get email() {
+    return _email;
+  }
 
-const string = "(((()[)))]"
+  set phone(v) {
+    if (typeof v !== "number") {
+      throw new TypeError("you phone number must be a number");
+    }
+     (_phone = v);
+  }
 
-console.log(checkSequence(string));  
+  get phone() {
+    return _phone;
+  }
 
- class Queue {
-  constructor(...args) {
-    this._head = 0;
-    this._tail = 0;
-
-    for(const item of args){
-      this.push(item);
+  getInfo() {
+    for (const [key, value] of Object.entries(this)) {
+      console.log(`${key}: ${value}`);
     }
   }
-  get size() {
-    return this._tail - this._head;
-  }
+}
 
-  push(value) {
-    this[this._tail++] = value;
-    return this.size;
-  }
+const Oleg = new Student(
+  "oleg",
+  "ivanovich",
+  "male",
+  "lkajfklj@.com",
+  5485245,
+  "medic",
+  "cardio"
+);
+const alex = new Student(
+  "alex",
+  "cosak",
+  "allo",
+  "lkasfjlk@.com",
+  54654,
+  "some facult",
+  "some chair"
+); */
 
-  pop() {
-    const lastItem = this[this._head];
-    delete this[this._head++];
+/* 3.1 Создать числовой массив и проинициализировать его из 25 элементов.
+3.1*Инициализация с помощью случайных чисел
+3.2 Вывести элементы с четными индексами
+3.3 Вывести только четные элементы (четные числа делятся на 2 без остатка)
+3.4 Вывести индексы нулевых элементов (элемент равен нулю)
+3.5 Подсчитать количество нулевых элементов */
 
-    return lastItem;
+const array1 = new Array(25);
+function randomPush(array) {
+  for (let i = 0; i < array.length; i++) {
+    array[i] = Math.floor(Math.random() * 51);
   }
 }
 
-const q1 = new Queue(1,3,5);
-const q2 = new Queue(2,4,6);
 
-function mergeQueues (...arg){
-  const result = new Queue();
-
-    while(q1._size || q2._size ){
-      if(q1._size){
-        const buffer = q1.pop();
-        result.push(buffer); 
-      }
-      if(q2._size){
-        const buffer = q2.pop();
-        reuslt.push(buffer);
-      }
+function evenIndex(arr){
+  const evenIndexArr = new Array;
+  for(let i=0; i<arr.length; i++){
+    if(i%2=== 0){
+      evenIndexArr.push(i);
     }
-  
-  return queue
-}
- 
- const user32 = {
-  id:1,
-  name:'john1',
-  surName : 'John1',
-  age:18,
-}
-const user89 = {
-  id:2,
-  name:'Jane',
-  surName : 'John2',
-  age:36,
-}
-
-const johnMessages = ['str1','str2','str'];
-const janeMessages = ['1111', 'hell', 'test'];
-
-const mapAllMessages = new Map();
-
-mapAllMessages.set(user32.id,johnMessages);
-mapAllMessages.set(user89.id,janeMessages);
-
-
-
-function getMsgFromMap(userId){
-  return `${mapAllMessages.get(userId)}`;
+  }
+  return evenIndexArr;
 } 
 
+function evenValue(arr){
+  const evenValuesArr = new Array;
+  for(let i=0; i<arr.length; i++){
+    if(arr[i]%2=== 0){
+      evenValuesArr.push(arr[i]);
+    }
+  }
+  return evenValuesArr;
+} 
 
+function if0 (arr){
+  for(let i=0; i<arr.length; i++){
+    if(arr[i] === 0){
+    console.log(i);
+    }
+  }
+}
 
-
-
-
-
+console.log(randomPush(array1));
+console.log(evenIndex(array1));
+console.log(evenValue(array1));
