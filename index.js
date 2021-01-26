@@ -177,6 +177,16 @@ function if0 (arr){
   }
 }
 
+function sumIndexValue0(arr){
+  let count = 0;
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i] === 0){
+      count++
+    }
+  }
+  return count;
+}
+
 console.log(randomPush(array1));
 console.log(evenIndex(array1));
 console.log(evenValue(array1));
