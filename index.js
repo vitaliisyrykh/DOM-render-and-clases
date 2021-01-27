@@ -3,7 +3,7 @@
 /* 1 Вычислить сумму первых N элементов последовательности . параметр N задает пользователь
 (например n=4 , 1+2+3+4) */
 
-function getFirstsum(n) {
+function getElementSum(n) {
   let sum = 0;
   for (let i = 0; i <= n; i++) {
     sum += i;
@@ -59,6 +59,8 @@ class Student extends Faculty {
   set name(v) {
     if (typeof v !== "string") {
       throw new TypeError("name must be a string");
+    }else if (v === "") {
+      throw new RangeError("please enter somthing");
     }
     return (this._name = v);
   }
@@ -69,6 +71,8 @@ class Student extends Faculty {
   set surName(v) {
     if (typeof v !== "string") {
       throw new TypeError("surname must be a string");
+    }else if (v === "") {
+      throw new RangeError("please enter somthing");
     }
      (this._surName = v);
   }
@@ -78,8 +82,10 @@ class Student extends Faculty {
 
   set gender(v) {
     debugger;
-    if (typeof v !== "string" || !GENDER_LIST.includes(v)) {
+    if (typeof v !== "string" || (!GENDER_LIST.includes(v)) {
       throw new TypeError("gender must be a string or male or female");
+    }else if (v === "") {
+      throw new RangeError("please enter somthing");
     }
     this._gender = v;
   }
@@ -90,6 +96,8 @@ class Student extends Faculty {
   set email(v) {
     if (typeof v !== "string") {
       throw new TypeError("email must be a string");
+    }else if (v === "") {
+      throw new RangeError("please enter somthing");
     }
      (_email = v);
   }
@@ -100,6 +108,8 @@ class Student extends Faculty {
   set phone(v) {
     if (typeof v !== "number") {
       throw new TypeError("you phone number must be a number");
+    }else if (v === "") {
+      throw new RangeError("please enter somthing");
     }
      (_phone = v);
   }
@@ -142,46 +152,46 @@ const alex = new Student(
 3.5 Подсчитать количество нулевых элементов */
 
 const array1 = new Array(25);
+
 function randomPush(array) {
   for (let i = 0; i < array.length; i++) {
     array[i] = Math.floor(Math.random() * 51);
   }
 }
 
-
-function evenIndex(arr){
-  const evenIndexArr = new Array;
-  for(let i=0; i<arr.length; i++){
-    if(i%2=== 0){
-      evenIndexArr.push(i);
+function evenIndex(arr) {
+  const evenIndexArr = new Array();
+  for (let i = 0; i < arr.length; i++) {
+    if (i % 2 === 0) {
+      evenIndexArr.push(arr[i]);
     }
   }
   return evenIndexArr;
-} 
+}
 
-function evenValue(arr){
-  const evenValuesArr = new Array;
-  for(let i=0; i<arr.length; i++){
-    if(arr[i]%2=== 0){
+function evenValue(arr) {
+  const evenValuesArr = new Array();
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
       evenValuesArr.push(arr[i]);
     }
   }
   return evenValuesArr;
-} 
+}
 
-function if0 (arr){
-  for(let i=0; i<arr.length; i++){
-    if(arr[i] === 0){
-    console.log(i);
+function if0(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      console.log(i);
     }
   }
 }
 
-function sumIndexValue0(arr){
+function sumIndexValue0(arr) {
   let count = 0;
-  for(let i = 0; i < arr.length; i++){
-    if(arr[i] === 0){
-      count++
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      count++;
     }
   }
   return count;
@@ -190,3 +200,121 @@ function sumIndexValue0(arr){
 console.log(randomPush(array1));
 console.log(evenIndex(array1));
 console.log(evenValue(array1));
+
+/* 4 Создать классы:
+- Книга (автор, название, год издания, издательство)
+- Электронная версия книги (автор, название, год издания, издательство, формат, электронный номер) */
+
+class Book {
+  constructor(avtor, nameBook, yearOfPublished, publishingHouse) {
+    this.avtor = avtor;
+    this.nameBook = nameBook;
+    this.yearOfPublished = yearOfPublished;
+    this.publishingHouse = publishingHouse;
+  }
+
+  set avtor(v) {
+    if (typeof v !== "string") {
+      throw new TypeError("avtor must be a string");
+    } else if (v === "") {
+      throw new RangeError("please enter somthing");
+    }
+    this._avtor = v;
+  }
+
+  get avtor() {
+    return this._avtor;
+  }
+
+  set nameBook(v) {
+    if (typeof v !== "string") {
+      throw new TypeError("Name book must be a string");
+    } else if (v === "") {
+      throw new RangeError("please enter somthing");
+    }
+    this._nameBook = v;
+  }
+
+  get nameBook() {
+    return this._nameBook;
+  }
+
+  set yearOfPublished(v) {
+    if(typeof v !== "number"){
+      throw new TypeError("year must be a number")
+    }else if(v === ""){
+      throw new RangeError("please enter somthing")
+    }
+    this._yearOfPublished = v;
+  }
+  get yearOfPublished() {
+    return this._yearOfPublished;
+  }
+
+  set publishingHouse(v) {
+    if (typeof v !== "string") {
+      throw new TypeError("Name book must be a string");
+    } else if (v === "") {
+      throw new RangeError("please enter somthing");
+    }
+    this._publishingHouse = v;
+  }
+
+  get publishingHouse() {
+    return this._publishingHouse;
+  }
+}
+
+const FORMAT_BOOK = ['EPUB','PDF'];
+
+class EBook extends Book{
+  constructor(avtor, nameBook, yearOfPublished, publishingHouse, format, eNumber){
+    super(avtor, nameBook, yearOfPublished, publishingHouse);
+    this.format = format;
+    this.eNumber = eNumber;
+  }
+
+  set format (v){
+    if(!FORMAT_BOOK.includes(v)){
+      throw new TypeError("You enter wrong  type book")
+    }else if (v === "") {
+      throw new RangeError("please enter somthing");
+    }
+    this._format = v;
+  }
+  get format() {
+    return this._format;
+  }
+
+  set eNumber(v) {
+    if(typeof v !== "number"){
+      throw new TypeError("year must be a number")
+    }else if(v === ""){
+      throw new RangeError("please enter somthing")
+    }
+    this._eNumber = v;
+  }
+  get eNumber() {
+    return this._eNumber;
+  }
+}
+
+
+const garryPotterEBook = new EBook('J.K. Rowling', 'Garry Potter', 1997, 'Bloomsbury Publishing','PDF', 4654213);
+
+const rayBradberyBook = new Book('Ray Bradberry', '451 of farengeit', 1956, 'some house');
+
+/* Требуется написать функцию, выводящую в консоль числа от 1 до n, где n — это целое число, которая функция принимает в качестве параметра, с такими условиями:
+вывод fizzbuzz вместо чисел, кратных как 3, так и 5.
+вывод fizz вместо чисел, кратных 3;
+вывод buzz вместо чисел, кратных 5; */
+
+function getSome(n){
+  for(let i = 0; i <= n; i++){
+    
+    if([i]%3 === 0 || [i]%5 === 0){
+     i = "flizzBuzz"
+    }
+    console.log(i);
+  }
+}
