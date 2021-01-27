@@ -162,8 +162,8 @@ function randomPush(array) {
 function evenIndex(arr) {
   const evenIndexArr = new Array();
   for (let i = 0; i < arr.length; i++) {
-    if (i % 2 === 0) {
-      evenIndexArr.push(arr[i]);
+    if (arr[i] % 2 === 0) {
+      evenIndexArr.push(i);
     }
   }
   return evenIndexArr;
