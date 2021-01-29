@@ -11,9 +11,10 @@ function createTextNode(text){
   const button = document.createElement("button");
   button.append(document.createTextNode('delete'))
   li.append(button);
-  button.addEventListener("click",(e)=>{
-    const {target:textContent,target:parentNode} = e;
-    if(arr.some())
+    button.addEventListener("click",(e)=>{
+    const {target:{parentNode:{textContent}},target:{parentNode}} = e;
+    arr = arr.filter((value) => value !== textContent); 
+    
     parentNode.remove();
   })
   return ul.append(li)
