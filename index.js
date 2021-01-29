@@ -8,12 +8,13 @@ function createTextNode(text){
   const ul = document.getElementById("rootList");
   const li = document.createElement("li");
   li.append(document.createTextNode(text));
+  li.setAttribute('data-li','li')
   const button = document.createElement("button");
-  button.append(document.createTextNode('delete'))
+  button.append(document.createTextNode('delete'));
   li.append(button);
-    button.addEventListener("click",(e)=>{
-    const {target:{parentNode:{textContent}},target:{parentNode}} = e;
-    arr = arr.filter((value) => value !== textContent); 
+  button.addEventListener("click",(e)=>{
+    const {target:{parentNode:{dataset:{li:{textContent}}}},target:{parentNode}} = e;
+    let arr2 = arr.filter((value) => value !== textContent); 
     
     parentNode.remove();
   })
